@@ -5,6 +5,15 @@ const path = require("path")
 const apiRoutes = require("./routes/api")
 
 const app = express()
+app.use(cors(
+  {
+    origin:["https://deploy-mern-lwhq.vercel,app"],
+    methods:["POST","GET"],
+    credentials:true
+  }
+  ));
+
+app.use(express.json())
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -32,6 +41,7 @@ const upload = multer({
 })
 
 // Enable CORS for all routes
+/*
 app.use(
   cors({
     origin: "http://localhost:3000", // Allow frontend origin
@@ -39,8 +49,8 @@ app.use(
     allowedHeaders: ["Content-Type"],
   }),
 )
+*/
 
-app.use(express.json())
 
 // Error handling for file upload
 app.use((err, req, res, next) => {
